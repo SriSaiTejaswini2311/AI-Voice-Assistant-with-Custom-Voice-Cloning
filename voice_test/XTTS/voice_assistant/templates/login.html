@@ -1,0 +1,402 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login - Professional AI Voice Assistant</title>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Space+Grotesk:wght@400;500;600;700&display=swap" rel="stylesheet">
+  <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" rel="stylesheet">
+  
+  <style>
+    :root {
+      --primary-bg: #0f1419;
+      --card-bg: rgba(26, 31, 46, 0.95);
+      --accent-primary: #3b82f6;
+      --accent-secondary: #06b6d4;
+      --accent-gradient: linear-gradient(135deg, #3b82f6 0%, #06b6d4 100%);
+      --text-primary: #ffffff;
+      --text-secondary: #cbd5e1;
+      --text-muted: #64748b;
+      --border-primary: rgba(59, 130, 246, 0.3);
+      --border-secondary: rgba(255, 255, 255, 0.1);
+      --shadow-lg: 0 25px 50px -12px rgba(0, 0, 0, 0.4);
+      --shadow-accent: 0 10px 25px -3px rgba(59, 130, 246, 0.3);
+    }
+
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+      height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background: var(--primary-bg);
+      color: var(--text-primary);
+      position: relative;
+      overflow: hidden;
+    }
+
+    body::before {
+      content: '';
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      background: 
+        radial-gradient(circle at 20% 80%, rgba(59, 130, 246, 0.15) 0%, transparent 50%),
+        radial-gradient(circle at 80% 20%, rgba(6, 182, 212, 0.15) 0%, transparent 50%),
+        linear-gradient(135deg, #0f1419 0%, #1a1f2e 100%);
+      pointer-events: none;
+      z-index: -1;
+    }
+
+    .background-pattern {
+      position: fixed;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      opacity: 0.02;
+      background-image: 
+        radial-gradient(circle at 25px 25px, var(--accent-primary) 2px, transparent 0),
+        radial-gradient(circle at 75px 75px, var(--accent-secondary) 1px, transparent 0);
+      background-size: 100px 100px;
+      background-position: 0 0, 50px 50px;
+      animation: drift 60s linear infinite;
+      z-index: -1;
+    }
+
+    @keyframes drift {
+      from { transform: translate(0, 0); }
+      to { transform: translate(100px, 100px); }
+    }
+
+    .login-container {
+      background: var(--card-bg);
+      backdrop-filter: blur(20px);
+      border: 1px solid var(--border-secondary);
+      border-radius: 2rem;
+      padding: 3rem;
+      box-shadow: var(--shadow-lg);
+      max-width: 420px;
+      width: 90%;
+      text-align: center;
+      position: relative;
+      z-index: 1;
+    }
+
+    .login-container::before {
+      content: '';
+      position: absolute;
+      top: -1px;
+      left: -1px;
+      right: -1px;
+      bottom: -1px;
+      background: var(--accent-gradient);
+      border-radius: 2rem;
+      z-index: -1;
+      opacity: 0.5;
+      filter: blur(10px);
+    }
+
+    .logo {
+      width: 80px;
+      height: 80px;
+      background: var(--accent-gradient);
+      border-radius: 1.5rem;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      margin: 0 auto 2rem;
+      font-size: 2rem;
+      color: white;
+      box-shadow: var(--shadow-accent);
+    }
+
+    .login-title {
+      font-family: 'Space Grotesk', sans-serif;
+      font-size: 2rem;
+      font-weight: 700;
+      color: var(--text-primary);
+      margin-bottom: 0.5rem;
+    }
+
+    .login-subtitle {
+      color: var(--text-secondary);
+      font-size: 1rem;
+      margin-bottom: 2.5rem;
+      font-weight: 400;
+    }
+
+    .form-group {
+      margin-bottom: 2rem;
+      text-align: left;
+    }
+
+    .form-label {
+      display: block;
+      font-size: 0.875rem;
+      font-weight: 600;
+      color: var(--text-secondary);
+      margin-bottom: 0.5rem;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+    }
+
+    .form-input {
+      width: 100%;
+      padding: 1rem 1.25rem;
+      background: rgba(59, 130, 246, 0.05);
+      border: 1px solid var(--border-primary);
+      border-radius: 0.75rem;
+      color: var(--text-primary);
+      font-size: 1rem;
+      transition: all 0.3s ease;
+      font-family: inherit;
+    }
+
+    .form-input:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+      box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+      background: rgba(59, 130, 246, 0.08);
+    }
+
+    .form-input::placeholder {
+      color: var(--text-muted);
+    }
+
+    .login-btn {
+      width: 100%;
+      padding: 1rem;
+      background: var(--accent-gradient);
+      border: none;
+      border-radius: 0.75rem;
+      color: white;
+      font-size: 1rem;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      box-shadow: 0 4px 14px rgba(59, 130, 246, 0.3);
+      font-family: inherit;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 0.5rem;
+    }
+
+    .login-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 8px 25px rgba(59, 130, 246, 0.4);
+    }
+
+    .login-btn:active {
+      transform: translateY(0);
+    }
+
+    .security-note {
+      margin-top: 2rem;
+      padding: 1rem;
+      background: rgba(16, 185, 129, 0.1);
+      border: 1px solid rgba(16, 185, 129, 0.2);
+      border-radius: 0.75rem;
+      font-size: 0.875rem;
+      color: var(--text-secondary);
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+    }
+
+    .security-icon {
+      color: #10b981;
+      font-size: 1rem;
+    }
+
+    /* Loading state */
+    .login-btn:disabled {
+      opacity: 0.7;
+      cursor: not-allowed;
+      transform: none;
+    }
+
+    .loading-spinner {
+      width: 20px;
+      height: 20px;
+      border: 2px solid rgba(255, 255, 255, 0.3);
+      border-radius: 50%;
+      border-top-color: white;
+      animation: spin 1s ease-in-out infinite;
+    }
+
+    @keyframes spin {
+      to { transform: rotate(360deg); }
+    }
+
+    /* Responsive Design */
+    @media (max-width: 480px) {
+      .login-container {
+        padding: 2rem;
+        border-radius: 1.5rem;
+      }
+      
+      .login-title {
+        font-size: 1.75rem;
+      }
+      
+      .logo {
+        width: 70px;
+        height: 70px;
+        font-size: 1.75rem;
+      }
+    }
+
+    /* Animation for container */
+    .login-container {
+      animation: slideIn 0.6s ease-out;
+    }
+
+    @keyframes slideIn {
+      from {
+        opacity: 0;
+        transform: translateY(30px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    /* Floating particles effect */
+    .particle {
+      position: absolute;
+      width: 4px;
+      height: 4px;
+      background: var(--accent-primary);
+      border-radius: 50%;
+      opacity: 0.3;
+      animation: float 8s infinite linear;
+    }
+
+    .particle:nth-child(1) { left: 10%; animation-delay: 0s; }
+    .particle:nth-child(2) { left: 20%; animation-delay: 1s; }
+    .particle:nth-child(3) { left: 30%; animation-delay: 2s; }
+    .particle:nth-child(4) { left: 40%; animation-delay: 3s; }
+    .particle:nth-child(5) { left: 50%; animation-delay: 4s; }
+    .particle:nth-child(6) { left: 60%; animation-delay: 5s; }
+    .particle:nth-child(7) { left: 70%; animation-delay: 6s; }
+    .particle:nth-child(8) { left: 80%; animation-delay: 7s; }
+
+    @keyframes float {
+      0% {
+        transform: translateY(100vh) rotate(0deg);
+        opacity: 0;
+      }
+      10% {
+        opacity: 0.3;
+      }
+      90% {
+        opacity: 0.3;
+      }
+      100% {
+        transform: translateY(-100px) rotate(360deg);
+        opacity: 0;
+      }
+    }
+  </style>
+</head>
+<body>
+  <div class="background-pattern"></div>
+  
+  <!-- Floating particles -->
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+  <div class="particle"></div>
+
+  <div class="login-container">
+    <div class="logo">
+      <i class="fas fa-robot"></i>
+    </div>
+    
+    <h1 class="login-title">Welcome Back</h1>
+    <p class="login-subtitle">Access your AI Voice Assistant</p>
+    
+    <form method="POST" id="loginForm">
+      <div class="form-group">
+        <label for="email" class="form-label">Email Address</label>
+        <input 
+          type="email" 
+          name="email" 
+          id="email" 
+          class="form-input" 
+          placeholder="Enter your email address" 
+          required 
+          autocomplete="email"
+        >
+      </div>
+      
+      <button type="submit" class="login-btn" id="loginBtn">
+        <i class="fas fa-sign-in-alt"></i>
+        <span id="btnText">Continue to Dashboard</span>
+      </button>
+    </form>
+    
+    <div class="security-note">
+      <i class="fas fa-shield-alt security-icon"></i>
+      <span>Your session is secured with enterprise-grade encryption</span>
+    </div>
+  </div>
+
+  <script>
+    const loginForm = document.getElementById('loginForm');
+    const loginBtn = document.getElementById('loginBtn');
+    const btnText = document.getElementById('btnText');
+    const emailInput = document.getElementById('email');
+
+    loginForm.addEventListener('submit', function(e) {
+      loginBtn.disabled = true;
+      btnText.textContent = 'Authenticating...';
+      loginBtn.innerHTML = `
+        <div class="loading-spinner"></div>
+        <span>Authenticating...</span>
+      `;
+    });
+
+    // Auto-focus email input
+    emailInput.focus();
+
+    // Enhanced email validation
+    emailInput.addEventListener('input', function() {
+      const email = this.value;
+      const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+      
+      if (email && !emailRegex.test(email)) {
+        this.style.borderColor = '#ef4444';
+        this.style.boxShadow = '0 0 0 3px rgba(239, 68, 68, 0.1)';
+      } else {
+        this.style.borderColor = 'var(--border-primary)';
+        this.style.boxShadow = 'none';
+      }
+    });
+
+    // Add keyboard shortcut for form submission
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Enter' && !e.shiftKey) {
+        if (document.activeElement === emailInput) {
+          loginForm.submit();
+        }
+      }
+    });
+  </script>
+</body>
+</html>

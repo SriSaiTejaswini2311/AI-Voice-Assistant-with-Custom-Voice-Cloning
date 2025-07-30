@@ -1,0 +1,7 @@
+{
+  "cloned_voices": {
+    "Udaya ": "voice_samples/47927d67-697a-4a00-a375-43bf4ff8311f.wav",
+    "Tejaswini": "voice_samples/ff3379e7-c33c-4476-938a-3be051309f94.wav"
+  },
+  "default_voice": "alexa"
+}

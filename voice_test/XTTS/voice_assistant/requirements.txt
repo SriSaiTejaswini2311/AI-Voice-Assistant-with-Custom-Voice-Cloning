@@ -1,0 +1,10 @@
+openai-whisper
+pyttsx3
+sounddevice
+scipy
+langchain
+langchain-anthropic
+langchain-community
+python-dotenv
+Flask
+TTS
