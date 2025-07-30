@@ -1,4 +1,4 @@
-# Voice Assistant Project (XTTS)
+# AI VOICE ASSISTANT WITH CUSTOM VOICE CLONING
 
 ## Overview
 This project is a voice assistant application that allows users to interact using voice commands. It supports voice cloning, audio processing, and provides a web interface for user interaction.
